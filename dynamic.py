@@ -62,6 +62,11 @@ class Trajectory:
         plt.legend(loc='upper right')
         plt.show()
 
+
+import numpy as np
+import pandas as pd
+from dataclasses import dataclass
+
 @dataclass
 class Mission:
     reference: np.ndarray
@@ -75,8 +80,16 @@ class Mission:
 
     @classmethod
     def from_csv(cls, file_name: str):
-        # You are required to implement this method
-        pass
+        # Read the CSV file into a pandas DataFrame
+        data = pd.read_csv(file_name)
+        
+        # Extract the columns for reference, cave_height, and cave_depth
+        reference = data['reference'].to_numpy()
+        cave_height = data['cave_height'].to_numpy()
+        cave_depth = data['cave_depth'].to_numpy()
+
+        # Return an instance of the Mission class
+        return cls(reference, cave_height, cave_depth)
 
 
 class ClosedLoop:
