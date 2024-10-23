@@ -3,6 +3,9 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 from .terrain import generate_reference_and_limits
+import pandas as pd
+
+
 
 class Submarine:
     def __init__(self):
@@ -32,6 +35,7 @@ class Submarine:
     
     def get_position(self) -> tuple:
         return self.pos_x, self.pos_y
+    
     
     def reset_state(self):
         self.pos_x = 0
@@ -63,9 +67,6 @@ class Trajectory:
         plt.show()
 
 
-import numpy as np
-import pandas as pd
-from dataclasses import dataclass
 
 @dataclass
 class Mission:
@@ -97,6 +98,9 @@ class ClosedLoop:
         self.plant = plant
         self.controller = controller
 
+    # this is incomplete: I need to complete thsi method by producing the 
+    # appropriate control action, given the observation and reference signals
+
     def simulate(self,  mission: Mission, disturbances: np.ndarray) -> Trajectory:
 
         T = len(mission.reference)
@@ -110,8 +114,18 @@ class ClosedLoop:
         for t in range(T):
             positions[t] = self.plant.get_position()
             observation_t = self.plant.get_depth()
-            # Call your controller here
-            self.plant.transition(actions[t], disturbances[t])
+            
+            # Step 1: Compute the error
+            error = mission.reference[t] - observation_t
+            
+            # Step 2: Get the control action from the controller
+            control_action = self.controller.PD_control(error)
+            
+            # Step 3: Store the control action
+            actions[t] = control_action
+            
+            # Apply the control action and disturbance to transition the plant
+            self.plant.transition(control_action, disturbances[t])
 
         return Trajectory(positions)
         
