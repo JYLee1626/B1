@@ -24,7 +24,7 @@ def generate_reference_and_limits(duration, scale):
     upper_margin = bound*np.ones(duration)
     lower_margin = bound*np.ones(duration)
     alpha = 0.6
-    for t in range(duration-1):
+    for t in range(duration-1):   
         upper_margin[t+1] = alpha*upper_margin[t] + (1-alpha)*np.random.uniform(0.5, bound)
         lower_margin[t+1] = alpha*lower_margin[t] + (1-alpha)*np.random.uniform(0.5, bound)
 
