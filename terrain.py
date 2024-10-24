@@ -12,7 +12,7 @@ def generate_random_multisine_timeseries(length=100):
     multisine_series = np.zeros(length)
     for frequency in frequncies:
         amplitude = np.random.uniform(0.1, 1)  # Random amplitude between 0.1 and 1
-        multisine_series += amplitude * np.sin(frequency * t * 2 * np.pi)
+        multisine_series += amplitude * np.sin(frequency * t * 2 * np.pi) 
     
     return t, multisine_series
 
