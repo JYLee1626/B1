@@ -39,6 +39,9 @@ def plot_reference_and_terrain(reference, upper, lower):
     plt.plot(lower, 'r')
     plt.show()
 
+
+    
+
 def write_mission_to_csv(mission, file_name):
     # Create a DataFrame from the Mission object's attributes
     data = {
