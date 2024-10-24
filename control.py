@@ -1,11 +1,6 @@
 # Controller class that takes in a dictionary of gains from the user
 # and computes the control action based on the current error and the previous error
 
-# I allow the user to set all 3 gains: Kp, Ki, Kd in the dictionary, rather than 
-# setting only Kp and Kd as fixed values in the class as per the example 
-# so the code is more modular for future changes. 
-# Of course, the user still has to modify the controller_action function if they would like to add integral action
-
 class Controller:
     def __init__(self, gains):
         """
