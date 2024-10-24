@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
-from .terrain import generate_reference_and_limits
+from terrain import generate_reference_and_limits
 import pandas as pd
 
 
@@ -99,9 +99,6 @@ class ClosedLoop:
     def __init__(self, plant: Submarine, controller):
         self.plant = plant
         self.controller = controller
-
-    # this was incomplete: I had to complete thsi method by producing the 
-    # appropriate control action, given the observation and reference signals
 
     def simulate(self,  mission: Mission, disturbances: np.ndarray) -> Trajectory:
 
