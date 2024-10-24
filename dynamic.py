@@ -66,6 +66,8 @@ class Trajectory:
         plt.legend(loc='upper right')
         plt.show()
 
+    
+
 
 
 @dataclass
@@ -98,7 +100,7 @@ class ClosedLoop:
         self.plant = plant
         self.controller = controller
 
-    # this is incomplete: I need to complete thsi method by producing the 
+    # this was incomplete: I had to complete thsi method by producing the 
     # appropriate control action, given the observation and reference signals
 
     def simulate(self,  mission: Mission, disturbances: np.ndarray) -> Trajectory:
